@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DailyPaymentReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4cb7bcfc-14e3-40fd-8716-133f86a216e6">
+	<property name="ireport.zoom" value="2.593742460100007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="307"/>
+	<parameter name="PAGE_TITLE" class="java.lang.String"/>
+	<parameter name="COMPANY_NAME" class="java.lang.String"/>
+	<parameter name="PRINTED_BY" class="java.lang.String"/>
+	<parameter name="START_DATE" class="java.util.Date"/>
+	<parameter name="APPROVED_STATUS" class="java.lang.String"/>
+	<field name="notrans" class="java.lang.String"/>
+	<field name="nama" class="java.lang.String"/>
+	<field name="no_id" class="java.lang.String"/>
+	<field name="unit_kerja" class="java.lang.String"/>
+	<field name="awal" class="java.util.Date"/>
+	<field name="akhir" class="java.util.Date"/>
+	<field name="harga" class="java.lang.Double"/>
+	<field name="cara_bayar" class="java.lang.Integer"/>
+	<field name="nopol" class="java.lang.String"/>
+	<field name="jenis_mobil" class="java.lang.String"/>
+	<field name="jenis_member" class="java.lang.String"/>
+	<field name="status" class="java.lang.Integer"/>
+	<field name="merk" class="java.lang.String"/>
+	<field name="tipe" class="java.lang.String"/>
+	<field name="tahun" class="java.lang.String"/>
+	<field name="warna" class="java.lang.String"/>
+	<field name="cara_bayar_name" class="java.lang.String"/>
+	<field name="jenis_transaksi" class="java.lang.Integer"/>
+	<field name="jenis_transaksi_name" class="java.lang.String"/>
+	<field name="tanggal" class="java.util.Date"/>
+	<field name="adm_approved" class="java.lang.String"/>
+	<variable name="harga_1" class="java.lang.Double" resetType="Group" resetGroup="BY_TANGGAL" calculation="Sum">
+		<variableExpression><![CDATA[$F{harga}]]></variableExpression>
+	</variable>
+	<variable name="harga_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{harga}]]></variableExpression>
+	</variable>
+	<variable name="notrans_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{notrans}]]></variableExpression>
+	</variable>
+	<variable name="harga_3" class="java.lang.Double" resetType="Group" resetGroup="BY_JENIS_TRANSAKSI" calculation="Sum">
+		<variableExpression><![CDATA[$F{harga}]]></variableExpression>
+	</variable>
+	<group name="BY_TANGGAL">
+		<groupExpression><![CDATA[$F{tanggal}]]></groupExpression>
+		<groupHeader>
+			<band height="24">
+				<staticText>
+					<reportElement uuid="0f7ebfcf-e7e1-4a0d-a60d-be815e2cc2d0" x="1" y="2" width="83" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Trans #]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6bedadb1-42b6-4a43-93c5-9487d57e0f90" x="85" y="2" width="87" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6e0833aa-e8e8-427f-a90f-9062f2c11625" x="223" y="2" width="50" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Unit #]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2ad2044a-7a9d-443f-a04a-87caa5039c40" x="173" y="2" width="50" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Stiker #]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="a312e56c-4887-4386-99d0-d7daaadb148c" x="341" y="2" width="50" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Start]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="431ba95b-907b-4dcf-9413-b11293a1a921" x="392" y="2" width="50" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[End]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="4c2db7c1-7137-4656-9701-cb7544f69241" x="443" y="2" width="120" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Trans Type]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="449b2f81-91cf-49be-83f0-37649756b227" x="564" y="2" width="50" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Billing Method]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="a84cc5a1-ade5-4dbe-acdf-bfc0453e36ed" x="1" y="22" width="799" height="1"/>
+				</line>
+				<staticText>
+					<reportElement uuid="449b2f81-91cf-49be-83f0-37649756b227" x="614" y="2" width="100" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Price]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="449b2f81-91cf-49be-83f0-37649756b227" x="725" y="2" width="75" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Approved By]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8d8fdb2c-b39b-4e45-997d-4cb51e87a923" x="274" y="2" width="66" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Plat #]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="13">
+				<textField pattern="Rp #,##0.00">
+					<reportElement uuid="8ca8cd13-edcc-4c8f-b4c0-6eab0d5ebe92" x="521" y="0" width="100" height="12"/>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{harga_1}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="a84cc5a1-ade5-4dbe-acdf-bfc0453e36ed" x="1" y="0" width="799" height="1"/>
+				</line>
+				<staticText>
+					<reportElement uuid="6bedadb1-42b6-4a43-93c5-9487d57e0f90" x="3" y="1" width="102" height="12"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total All]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="BY_JENIS_TRANSAKSI">
+		<groupExpression><![CDATA[$F{jenis_transaksi}]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+				<textField>
+					<reportElement uuid="38ebae2f-7784-412b-bbca-539dff4506c0" x="1" y="0" width="795" height="18"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{jenis_transaksi_name}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="a84cc5a1-ade5-4dbe-acdf-bfc0453e36ed" x="1" y="17" width="799" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="13">
+				<textField pattern="Rp #,##0.00">
+					<reportElement uuid="a57cd8e3-fbf4-4407-a0e6-5a003dc2f9fd" x="521" y="0" width="100" height="12"/>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{harga_3}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="a84cc5a1-ade5-4dbe-acdf-bfc0453e36ed" x="3" y="0" width="799" height="1"/>
+				</line>
+				<staticText>
+					<reportElement uuid="6bedadb1-42b6-4a43-93c5-9487d57e0f90" x="3" y="1" width="34" height="12"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="fe53606c-1579-412d-a702-bca00b663f59" x="37" y="1" width="100" height="12"/>
+					<textElement>
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{jenis_transaksi_name}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="8" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="84" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="20b9d93e-1949-4727-b05c-1c63254c0f8e" x="700" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="64b58cff-6a2f-42ff-8227-746c7a56079d" x="0" y="0" width="353" height="26"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PAGE_TITLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7e96c16b-92e0-4aac-992f-611223e49dc4" x="700" y="40" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PRINTED_BY}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="586fedba-884c-4d1f-bc95-d4bebc5dd669" x="714" y="20" width="40" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f6267e8c-9b85-4b21-82eb-4d67cc140b06" x="600" y="40" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[Printed By : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="41f90949-51fe-4049-a087-43f635dafd16" x="654" y="20" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page : "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e1e38840-fff7-425f-90c3-aa1cdd693b40" x="0" y="26" width="353" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COMPANY_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="fa0444b1-9aaa-4953-89bd-2123dc5e2b34" x="600" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[Printed Date : ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="cf09b45a-044f-497b-93fd-f3500b2e1eae" x="64" y="46" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{START_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cc324dbe-b235-475f-82c1-3efb694d18bf" x="1" y="46" width="63" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DATE : "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f6267e8c-9b85-4b21-82eb-4d67cc140b06" x="600" y="60" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[Report Status : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f608642d-e8dd-4055-a2b0-b72baec3c821" x="699" y="60" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{APPROVED_STATUS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="3" splitType="Stretch">
+			<line>
+				<reportElement uuid="a0932381-5469-4817-90ed-040b55304c14" x="0" y="0" width="799" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7dd8c63f-ccb5-446a-9462-f1a13beb9a8b" x="0" y="0" width="83" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{notrans}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8c5f3e78-8d59-457d-97c8-c6bb7ccd1adc" x="84" y="0" width="87" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a0a43c36-434e-4dd9-a94b-395749c39538" x="223" y="0" width="50" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unit_kerja}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="67c74f5a-6120-403c-b964-2812d7c1e4bd" x="172" y="0" width="50" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="c30c957f-1699-45c3-8fec-f20abe87d962" x="341" y="0" width="50" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{awal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="22385ade-1f36-41f5-a31a-63f4f7f463ac" x="392" y="0" width="50" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{akhir}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d282bab4-8d25-486a-917e-af72a45e1d12" x="443" y="0" width="119" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jenis_transaksi_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9dbd9da4-57d9-427d-a303-9fc835721ab5" x="563" y="0" width="50" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cara_bayar_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0.00">
+				<reportElement uuid="c7bd84f9-36f7-402b-a1b2-a0211f5f0248" x="614" y="0" width="100" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f1533209-5669-43c7-bb3f-6f0385feddba" x="725" y="0" width="75" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{adm_approved}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fe87e549-3004-420b-9ff9-0ea5dc104176" x="274" y="0" width="66" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nopol}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="130" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6bedadb1-42b6-4a43-93c5-9487d57e0f90" x="25" y="12" width="102" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total                      :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6bedadb1-42b6-4a43-93c5-9487d57e0f90" x="25" y="33" width="102" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Transaction :]]></text>
+			</staticText>
+			<textField pattern="Rp #,##0.00">
+				<reportElement uuid="3698831a-4885-4f46-83c6-ce7bfab789b4" x="164" y="12" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{harga_2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="0a335fae-cf9c-4e48-99aa-f26014a52890" x="164" y="32" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{notrans_1}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="cde9aed0-6bf7-499c-924b-f6bd67442848" mode="Transparent" x="568" y="12" width="100" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="4a09cd4c-5149-479e-9891-847d2d5be0a9" x="568" y="32" width="100" height="80"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4a09cd4c-5149-479e-9891-847d2d5be0a9" x="668" y="32" width="100" height="80"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="b56cd558-2e82-4417-9f65-7243ad05ae92" mode="Transparent" x="568" y="32" width="100" height="80"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="4a09cd4c-5149-479e-9891-847d2d5be0a9" x="668" y="13" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Approved By]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="f7d71049-868e-484f-98ed-429383c2e2dd" mode="Transparent" x="668" y="12" width="100" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="4a09cd4c-5149-479e-9891-847d2d5be0a9" x="568" y="13" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Prepared By]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="6b0b77dc-d242-4b62-a0ce-4351781abd45" mode="Transparent" x="668" y="32" width="100" height="80"/>
+			</rectangle>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,107 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (safepoint.cpp:610), pid=10760, tid=8076
+#  fatal error: Deadlock in safepoint code.  Should have called back to the VM before blocking.
+#
+# JRE version: 6.0_25-b06
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (20.0-b11 mixed mode windows-amd64 compressed oops)
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000000070cb800):  JavaThread "AWT-Windows" daemon [_thread_in_native_trans, id=8076, stack(0x0000000007970000,0x0000000007a70000)]
+
+Stack: [0x0000000007970000,0x0000000007a70000]
+[error occurred during error reporting (printing stack bounds), id 0xe0000000]
+
+
+[error occurred during error reporting (printing native stack), id 0xe0000000]
+
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (H‹€(:128375136), pid=10760, tid=8076
+#  H‹ØH…À„Ÿ¹: õ?w
+#
+# JRE version: 6.0_25-b06
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (20.0-b11 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# C  [ntdll.dll+0x57e19]
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000000070cb800):  JavaThread "AWT-Windows" daemon [_thread_in_native_trans, id=8076, stack(0x0000000007970000,0x0000000007a70000)]
+
+Registers:
+RAX=0x000000000000800c, RBX=0x0000000007a6dcc0, RCX=0x0000000000000020, RDX=0x0000000007a6e280
+RSP=0x0000000007a6da50, RBP=0x3300f95900000003, RSI=0xfd4b73fa325bfcd1, RDI=0x0000000000000000
+R8 =0x0000000000000000, R9 =0x0000000000000126, R10=0x0000000001f934ff, R11=0x000000000000000f
+R12=0x00000000773f7e19, R13=0x000000000000010e, R14=0x0000000001f93517, R15=0x0000000000000000
+RIP=0x00000000773f7e19, EFLAGS=0x0000000000000000
+
+Top of Stack: (sp=0x0000000007a6da50)
+0x0000000007a6da50:   0000000000000000 00000000773f7e19
+0x0000000007a6da60:   000000000000010e 0000000001f93517
+0x0000000007a6da70:   000007fffffdb000 0000000000000002
+0x0000000007a6da80:   00001fa000000002 00000000773f0033
+0x0000000007a6da90:   00000202002b0000 00000000ffffffff
+0x0000000007a6daa0:   0000000000003064 0000000000000000
+0x0000000007a6dab0:   00000000773f7ad0 0000000007a6dbe4
+0x0000000007a6dac0:   000007fffffd0654 00000000c0000005
+0x0000000007a6dad0:   0000000000000002 ac19fc71cb2827aa
+0x0000000007a6dae0:   0000000000000000 0000000007a6f750
+0x0000000007a6daf0:   000000006d211e00 0000000000000000
+0x0000000007a6db00:   0000000000000000 00000000773f7b99
+0x0000000007a6db10:   fffffffffffffffc 0000000000000001
+0x0000000007a6db20:   0000000000130000 0000000000000000
+0x0000000007a6db30:   0000000000000000 0000000000000000
+0x0000000007a6db40:   0000000000000000 00000000773f11f5 
+
+Instructions: (pc=0x00000000773f7e19)
+0x00000000773f7df9:   40 f6 c6 01 48 8d 75 ff 49 8b cf 48 0f 45 f5 4c
+0x00000000773f7e09:   8b e6 4d 0f af e5 4c 03 e3 49 8b d4 ff 54 24 70
+0x00000000773f7e19:   85 c0 0f 84 e7 08 00 00 0f 89 c6 04 fd ff 49 8b
+0x00000000773f7e29:   fc 49 2b fd eb 00 48 3b df 76 b9 eb 00 33 c0 48 
+
+
+Register to memory mapping:
+
+RAX=0x000000000000800c is an unknown value
+RBX=0x0000000007a6dcc0 is pointing into the stack for thread: 0x00000000070cb800
+RCX=0x0000000000000020 is an unknown value
+RDX=0x0000000007a6e280 is pointing into the stack for thread: 0x00000000070cb800
+RSP=0x0000000007a6da50 is pointing into the stack for thread: 0x00000000070cb800
+RBP=0x3300f95900000003 is an unknown value
+RSI=0xfd4b73fa325bfcd1 is an unknown value
+RDI=0x0000000000000000 is an unknown value
+R8 =0x0000000000000000 is an unknown value
+R9 =0x0000000000000126 is an unknown value
+R10=0x0000000001f934ff is an unknown value
+R11=0x000000000000000f is an unknown value
+R12=0x00000000773f7e19 is an unknown value
+R13=0x000000000000010e is an unknown value
+R14=0x0000000001f93517 is an unknown value
+R15=0x0000000000000000 is an unknown value
+
+
+Stack: [0x0000000007970000,0x0000000007a70000],  sp=0x0000000007a6da50,  free space=1014k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [ntdll.dll+0x57e19]  bsearch+0x85
+
+
+[error occurred during error reporting (printing Java stack), id 0xc0000005]
+
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (0x0), pid=10760, tid=8076
+#
+# JRE version: 6.0_25-b06
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (20.0-b11 mixed mode windows-amd64 compressed oops)
