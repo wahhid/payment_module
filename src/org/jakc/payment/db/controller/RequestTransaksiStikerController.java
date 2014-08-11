@@ -254,7 +254,7 @@ public class RequestTransaksiStikerController {
 
     public ProcessCallBack FetchLastRequest(String no_id){
         RequestTransaksiStiker o = new RequestTransaksiStiker();
-        String strSQL = "SELECT * FROM request_transaksi_stiker WHERE no_id=? ORDER BY notrans DESC LIMIT 1";        
+        String strSQL = "SELECT * FROM request_transaksi_stiker WHERE no_id=? and cara_bayar=1 and approvedstatus=1 ORDER BY notrans DESC LIMIT 1";        
         try {
             this.pstmt = conn.prepareStatement(strSQL);
             this.pstmt.setString(1, no_id);

@@ -232,8 +232,8 @@ public class TransaksiStikerController {
         List<TransaksiStiker> os = new ArrayList();              
         TransaksiStiker o;
         Calendar cal = Calendar.getInstance();
-        String strSQL = "SELECT * FROM transaksi_stiker WHERE cara_bayar=1";
-        //String strSQL = "SELECT * FROM transaksi_stiker";
+        //String strSQL = "SELECT * FROM transaksi_stiker WHERE cara_bayar=1";
+        String strSQL = "SELECT * FROM transaksi_stiker";
         try{
             this.pstmt = this.conn.prepareStatement(strSQL);            
             this.rst = this.pstmt.executeQuery();

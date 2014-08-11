@@ -24,6 +24,7 @@ import org.jakc.common.util.ProcessCallBack;
 import org.jakc.payment.Auth;
 import org.jakc.payment.db.controller.BackingController;
 import org.jakc.payment.db.entity.BillingParking;
+import org.jakc.payment.db.entity.RequestTransaksiStiker;
 import org.jakc.payment.db.entity.TarifStiker;
 import org.jakc.payment.db.entity.TransaksiStiker;
 import org.jakc.payment.os.gui.BillingGridFrame;
@@ -197,106 +198,115 @@ public class BillingGridController extends GridController implements GridDataLoc
             System.out.println("Billing Periode : " + billingPeriode);
             //Process Billing                        
             int billingProcessed = 0;                        
+            for(TransaksiStiker o : os){
+                this.pcb = this.bc.getRequestTransaksiStikerController().FetchLastRequest(o.getNotrans());                                
+                if(!this.pcb.isError()){
+                    RequestTransaksiStiker rts = (RequestTransaksiStiker) this.pcb.getObject();
+                    System.out.println(rts.getNo_id() + "," + rts.getAwal() + "," + rts.getAkhir());
+                }
+            }
             for(TransaksiStiker o : os){  
-                this.pcb = this.bc.getRequestTransaksiStikerController().FetchLastRequest(o.getNotrans());                
-                System.out.println("Process : " + o.getNotrans());
-                cal.setTime(o.getAkhir());                                
-                System.out.println("Cal getAkhir : " + cal.getTime());
-                int akhirYear = cal.get(Calendar.YEAR);
-                System.out.println("Akhir Year : " + akhirYear);
-                int akhirMonth = cal.get(Calendar.MONTH) + 1;
-                System.out.println("Akhir Month : " + akhirMonth);
-                int akhirDay = o.getAkhir().getDate();
-                System.out.println("Akhir Day : " + akhirDay);
-                if (akhirYear > vo.getBilling_year()){
-                    akhirMonth = akhirMonth + 12;
-                }                
-                if((akhirMonth - vo.getBilling_month()) >= 2){
-                    //Process Generate Billing if month difference above 2
-                    System.out.println("Detected for Billing: " + o.getNotrans());
-                    System.out.println("Generate Billing for " + o.getNotrans());
-                    billingProcessed++;   
-                    
-                    BillingParking bp = new BillingParking();                    
-                    String jenis_langganan = o.getNotrans().substring(4);                                                                   
-                    if(jenis_langganan.equals("1")){
-                        jenis_langganan = "1st";
-                    }
-                    if(jenis_langganan.equals("2")){
-                        jenis_langganan = "2nd";
-                    }
-                    if(jenis_langganan.equals("3")){
-                        jenis_langganan = "3st";
-                    }
-                    if(jenis_langganan.equals("4")){
-                        jenis_langganan = "4th";
-                    }
-                    if(jenis_langganan.equals("5")){
-                        jenis_langganan = "5th";
-                    }                    
-                    
-                    cal.setTime(billingPeriode);
-                    int currentYear = cal.get(Calendar.YEAR);
-                    int currentMonth = cal.get(Calendar.MONTH) + 1;     
-                                      
-                    System.out.println("Int Current Month : " + currentMonth);
-                    
-                    String strCurrentYear = Integer.toString(currentYear);
-                    String strCurrentMonth = Integer.toString(currentMonth);
-                    System.out.println("String Current Month : " + strCurrentMonth);
-                    if(strCurrentMonth.length() == 1){
-                        strCurrentMonth = "0" + strCurrentMonth;
+                this.pcb = this.bc.getRequestTransaksiStikerController().FetchLastRequest(o.getNotrans());                                
+                if(!this.pcb.isError()){                                                       
+                    System.out.println("Process : " + o.getNotrans());
+                    cal.setTime(o.getAkhir());                                
+                    System.out.println("Cal getAkhir : " + cal.getTime());
+                    int akhirYear = cal.get(Calendar.YEAR);
+                    System.out.println("Akhir Year : " + akhirYear);
+                    int akhirMonth = cal.get(Calendar.MONTH) + 1;
+                    System.out.println("Akhir Month : " + akhirMonth);
+                    int akhirDay = o.getAkhir().getDate();
+                    System.out.println("Akhir Day : " + akhirDay);
+                    if (akhirYear > vo.getBilling_year()){
+                        akhirMonth = akhirMonth + 12;
+                    }                
+                    if((akhirMonth - vo.getBilling_month()) >= 2){
+                        //Process Generate Billing if month difference above 2
+                        System.out.println("Detected for Billing: " + o.getNotrans());
+                        System.out.println("Generate Billing for " + o.getNotrans());
+                        billingProcessed++;   
+
+                        BillingParking bp = new BillingParking();                    
+                        String jenis_langganan = o.getNotrans().substring(4);                                                                   
+                        if(jenis_langganan.equals("1")){
+                            jenis_langganan = "1st";
+                        }
+                        if(jenis_langganan.equals("2")){
+                            jenis_langganan = "2nd";
+                        }
+                        if(jenis_langganan.equals("3")){
+                            jenis_langganan = "3st";
+                        }
+                        if(jenis_langganan.equals("4")){
+                            jenis_langganan = "4th";
+                        }
+                        if(jenis_langganan.equals("5")){
+                            jenis_langganan = "5th";
+                        }                    
+
+                        cal.setTime(billingPeriode);
+                        int currentYear = cal.get(Calendar.YEAR);
+                        int currentMonth = cal.get(Calendar.MONTH) + 1;     
+
+                        System.out.println("Int Current Month : " + currentMonth);
+
+                        String strCurrentYear = Integer.toString(currentYear);
+                        String strCurrentMonth = Integer.toString(currentMonth);
                         System.out.println("String Current Month : " + strCurrentMonth);
-                    }
-                   
-                    String strFindLastDate = strCurrentYear + "-" + strCurrentMonth + "-01";
-                    Date findLastDate = new SimpleDateFormat("yyyy-MM-dd").parse(strFindLastDate);                    
-                    cal.setTime(findLastDate);
-                    int maxDay = cal.getActualMaximum(Calendar.DATE);
-                    System.out.println("Max Day  : "  + maxDay);
-                    String strCurrentDay;
-                    if(akhirDay > maxDay){
-                        strCurrentDay = Integer.toString(maxDay);
-                    }else{
-                        strCurrentDay = Integer.toString(akhirDay);                        
-                    }
-                    
-                    if(strCurrentDay.length() == 1){
-                            strCurrentDay = "0" + strCurrentDay;
-                    }                    
-                    
-                    
-                    String strReferenceDate = strCurrentYear + "-" + strCurrentMonth + "-" + strCurrentDay;
-                    System.out.println("String Reference Date : " + strReferenceDate);                    
-                    Date referenceDate = new SimpleDateFormat("yyyy-MM-dd").parse(strReferenceDate);                                            
-                    System.out.println("Reference Date : " + referenceDate);                    
-                    
-                    cal.setTime(referenceDate);
-                    
-                    cal.add(Calendar.MONTH, 1);                    
-                    Date awal = cal.getTime();
-                    System.out.println("Awal Date : " + awal);                    
-                    
-                    cal.add(Calendar.MONTH, 1);
-                    Date akhir = cal.getTime();                                                
-                    System.out.println("Akhir Date : " + akhir);
-                    
-                    String description = "Contribution A (" + jenis_langganan + ") periode " + new SimpleDateFormat("dd/MM/yy").format(awal) + " - " +  new SimpleDateFormat("dd/MM/yy").format(akhir) + ")";                    
-                    
-                    this.pcb = this.bc.getTarifStikerController().getByJenisLangganan(jenis_langganan);
-                    if(this.pcb.isError()){
-                        return this.pcb;
-                    }else{
-                        ts = (TarifStiker) this.pcb.getObject();
-                        bp.setUnitno(o.getUnit_kerja());
-                        bp.setDate_trans(new Date(System.currentTimeMillis()));                        
-                        bp.setDescription(description);
-                        bp.setAmount(ts.getTarif());
-                        bp.setBilling_id(vo.getBilling_id());
-                        bp.setJenis_langganan(jenis_langganan);
-                        bp.setAwal(awal);                        
-                        bp.setAkhir(akhir);                        
-                        this.bc.getBillingParkingController().insert(bp);                                                       
+                        if(strCurrentMonth.length() == 1){
+                            strCurrentMonth = "0" + strCurrentMonth;
+                            System.out.println("String Current Month : " + strCurrentMonth);
+                        }
+
+                        String strFindLastDate = strCurrentYear + "-" + strCurrentMonth + "-01";
+                        Date findLastDate = new SimpleDateFormat("yyyy-MM-dd").parse(strFindLastDate);                    
+                        cal.setTime(findLastDate);
+                        int maxDay = cal.getActualMaximum(Calendar.DATE);
+                        System.out.println("Max Day  : "  + maxDay);
+                        String strCurrentDay;
+                        if(akhirDay > maxDay){
+                            strCurrentDay = Integer.toString(maxDay);
+                        }else{
+                            strCurrentDay = Integer.toString(akhirDay);                        
+                        }
+
+                        if(strCurrentDay.length() == 1){
+                                strCurrentDay = "0" + strCurrentDay;
+                        }                    
+
+
+                        String strReferenceDate = strCurrentYear + "-" + strCurrentMonth + "-" + strCurrentDay;
+                        System.out.println("String Reference Date : " + strReferenceDate);                    
+                        Date referenceDate = new SimpleDateFormat("yyyy-MM-dd").parse(strReferenceDate);                                            
+                        System.out.println("Reference Date : " + referenceDate);                    
+
+                        cal.setTime(referenceDate);
+
+                        cal.add(Calendar.MONTH, 1);                    
+                        Date awal = cal.getTime();
+                        System.out.println("Awal Date : " + awal);                    
+
+                        cal.add(Calendar.MONTH, 1);
+                        Date akhir = cal.getTime();                                                
+                        System.out.println("Akhir Date : " + akhir);
+
+                        String description = "Contribution A (" + jenis_langganan + ") periode " + new SimpleDateFormat("dd/MM/yy").format(awal) + " - " +  new SimpleDateFormat("dd/MM/yy").format(akhir) + ")";                    
+
+                        this.pcb = this.bc.getTarifStikerController().getByJenisLangganan(jenis_langganan);
+                        if(this.pcb.isError()){
+                            return this.pcb;
+                        }else{
+                            ts = (TarifStiker) this.pcb.getObject();
+                            bp.setUnitno(o.getUnit_kerja());
+                            bp.setDate_trans(new Date(System.currentTimeMillis()));                        
+                            bp.setDescription(description);
+                            bp.setAmount(ts.getTarif());
+                            bp.setBilling_id(vo.getBilling_id());
+                            bp.setJenis_langganan(jenis_langganan);
+                            bp.setAwal(awal);                        
+                            bp.setAkhir(akhir);                        
+                            this.bc.getBillingParkingController().insert(bp);                                                       
+                        }
                     }
                 }else{
                     
