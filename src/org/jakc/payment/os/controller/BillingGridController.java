@@ -213,7 +213,8 @@ public class BillingGridController extends GridController implements GridDataLoc
                     RequestTransaksiStiker rts = (RequestTransaksiStiker) this.pcb.getObject();
                     if(rts.getCara_bayar() == 1 
                             && rts.getApprovedstatus() == 1 
-                            && !(new SimpleDateFormat("MMyyyy").format(rts.getAwal()).equals("122014"))){                    
+                            && !(new SimpleDateFormat("MMyyyy").format(rts.getAwal()).equals("122014"))
+                            && !(new SimpleDateFormat("MMyyyy").format(rts.getAwal()).equals("012015"))){                    
                         System.out.println("Process : " + o.getNotrans());
                         cal.setTime(o.getAkhir());                                
                         System.out.println("Cal getAkhir : " + cal.getTime());
@@ -224,8 +225,11 @@ public class BillingGridController extends GridController implements GridDataLoc
                         int akhirDay = o.getAkhir().getDate();
                         System.out.println("Akhir Day : " + akhirDay);
                         if (akhirYear > vo.getBilling_year()){
-                            akhirMonth = akhirMonth + 12;
+                            int diffYear = akhirYear - vo.getBilling_year();                            
+                            akhirMonth = akhirMonth + (diffYear * 12);
+                            System.out.println("Akhir Month : " + akhirMonth);
                         }                
+                        
                         if((akhirMonth - vo.getBilling_month()) >= 2){
                             //Process Generate Billing if month difference above 2
                             System.out.println("Detected for Billing: " + o.getNotrans());
